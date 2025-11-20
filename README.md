@@ -5,12 +5,11 @@ Ce projet implémente une architecture de données **Event-Driven** (pilotée pa
 Contrairement aux pipelines "Batch" classiques (qui tournent une fois par jour), ce système utilise **Apache Kafka** pour traiter la donnée à la milliseconde où elle est générée.
 
 ## Architecture Streaming
-
-```mermaid
+```mermaid 
 graph LR
-    A[Producer Python (Simulateur)] -- JSON Events --> B((Kafka Broker))
-    B -- Topic: website_clicks --> C[Consumer Python]
-    C -- Insert --> D[(PostgreSQL)]
+    A[Producer Python] -- JSON Events --> B((Kafka Broker))
+    B -->|Topic: website_clicks| C[Consumer Python]
+    C -->|Insert| D[(PostgreSQL)]
 ```
 
 * Producer : Simule le trafic d'un site E-commerce (génération aléatoire de clics, utilisateurs, produits) et sérialise les données en JSON.
